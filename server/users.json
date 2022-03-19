@@ -1110,17 +1110,6 @@
         "department": "Sales"
       },
       "id": 101
-    },
-    {
-      "first_name": "Test",
-      "last_name": "User",
-      "email": "test@gmail.com",
-      "gender": "Female",
-      "company": {
-        "name": "Cool Planet",
-        "department": "Engineering"
-      },
-      "id": 102
     }
   ]
 }

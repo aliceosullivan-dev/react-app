@@ -57,9 +57,6 @@ class EditUser extends React.Component<RouteComponentProps<any>, IFormState> {
             <div className="App">
                 {this.state.user &&
                     <div>
-                        < h1 > User List Management App</h1>
-                        <p> Built with React.js and TypeScript </p>
-
                         <div>
                             <div className={"col-md-12 form-wrapper"}>
                                 <h2> Edit User </h2>
@@ -84,14 +81,6 @@ class EditUser extends React.Component<RouteComponentProps<any>, IFormState> {
                                         <label htmlFor="phone"> Gender </label>
                                         <input type="text" id="phone" defaultValue={this.state.user.phone} onChange={(e) => this.handleInputChanges(e)} name="phone" className="form-control" placeholder="Enter user's phone number" />
                                     </div>
-                                    {/* <div className="form-group col-md-12">
-                                        <label htmlFor="address"> Address </label>
-                                        <input type="text" id="address" defaultValue={this.state.user.address} onChange={(e) => this.handleInputChanges(e)} name="address" className="form-control" placeholder="Enter user's address" />
-                                    </div>
-                                    <div className="form-group col-md-12">
-                                        <label htmlFor="description"> Description </label>
-                                        <input type="text" id="description" defaultValue={this.state.user.description} onChange={(e) => this.handleInputChanges(e)} name="description" className="form-control" placeholder="Enter Description" />
-                                    </div> */}
                                     <div className="form-group col-md-4 pull-right">
                                         <button className="btn btn-success" type="submit">
                                             Edit User </button>

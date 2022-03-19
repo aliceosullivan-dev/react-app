@@ -55,6 +55,8 @@ export default class Home extends React.Component<RouteComponentProps, IState> {
                                         <th>First Name</th>
                                         <th>Last Name</th>
                                         <th>Email</th>
+                                        <th>Gender</th>
+
                                         <th>Company Name</th>
                                         <th>Department</th>
                                         <th>Actions</th>
@@ -63,65 +65,43 @@ export default class Home extends React.Component<RouteComponentProps, IState> {
                                 </thead>
 
                                 <tbody>
-                                {users && users.map(user =>
-                                    <tr key={user.id}>
-                                        <td>{user.first_name}</td>
-                                        <td>{user.last_name}</td>
-                                        <td>{user.email}</td>
-                                        <td>{user.gender}</td>
-                                        <td>{user.company.name}</td>
-                                        <td>{user.company.department}</td>
-                                        <td>
-                                            <div className="d-flex justify-content-between align-items-center">
-                                                <div className="btn-group" style={{ marginBottom: "20px" }}>
-                                                    <Link to={`users/${user.id}`} className="btn btn-sm btn-outline-secondary">View User </Link>
+                                    {users && users.map(user =>
+                                        <tr key={user.id}>
+                                            <td>{user.id}</td>
 
-                                                    <Link to={`users/${user.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit User </Link>
-                                                    <button className="btn btn-sm btn-outline-secondary" onClick={() => this.deleteUser(user.id)}>Delete User</button>
+                                            <td>{user.first_name}</td>
+                                            <td>{user.last_name}</td>
+                                            <td>{user.email}</td>
+                                            <td>{user.gender}</td>
+                                            <td>{user.company.name}</td>
+                                            <td>{user.company.department}</td>
+                                            <td>
+                                                <div className="d-flex justify-content-between align-items-center">
+                                                    <div className="btn-group" style={{ marginBottom: "20px" }}>
+                                                        <Link to={`users/${user.id}`} className="btn btn-sm btn-outline-secondary">View User </Link>
+
+                                                        <Link to={`users/${user.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit User </Link>
+                                                        <button className="btn btn-sm btn-outline-secondary" onClick={() => this.deleteUser(user.id)}>Delete User</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                                {/* <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td><a href="#">Michael Holz</a></td>
-                                        <td>04/10/2013</td>
-                                        <td>Admin</td>
-                                        <td><span className="status text-success">&bull;</span> Active</td>
-                                        <td>
-                                            <a className="settings" title="Settings" data-toggle="tooltip"><i className="material-icons">&#xE8B8;</i></a>
-                                            <a className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons">&#xE5C9;</i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><a href="#">Paula Wilson</a></td>
-                                        <td>05/08/2014</td>
-                                        <td>Publisher</td>
-                                        <td><span className="status text-success">&bull;</span> Active</td>
-                                        <td>
-                                            <a className="settings" title="Settings" data-toggle="tooltip"><i className="material-icons">&#xE8B8;</i></a>
-                                            <a className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons">&#xE5C9;</i></a>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    )}
+                                </tbody>
 
-                                </tbody> */}
                             </table>
-                            <div className="clearfix">
+                            {/* <div className="clearfix">
                                 <div className="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                                 <ul className="pagination">
                                     <li className="page-item disabled"><a href="#">Previous</a></li>
-                                    <li className="page-item"><a href="#" className="page-link">1</a></li>
+                                    <li className="page-item active"><a href="#" className="page-link">1</a></li>
                                     <li className="page-item"><a href="#" className="page-link">2</a></li>
-                                    <li className="page-item active"><a href="#" className="page-link">3</a></li>
+                                    <li className="page-item"><a href="#" className="page-link">3</a></li>
                                     <li className="page-item"><a href="#" className="page-link">4</a></li>
                                     <li className="page-item"><a href="#" className="page-link">5</a></li>
                                     <li className="page-item"><a href="#" className="page-link">Next</a></li>
                                 </ul>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
