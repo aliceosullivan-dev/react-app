@@ -28,26 +28,14 @@ export default class Home extends React.Component<RouteComponentProps, IState> {
     public render() {
         const users = this.state.users;
         return (
-            <div>
+            <div className="container-xl">
                 {users.length === 0 && (
                     <div className="text-center">
                         <h2>No user found at the moment</h2>
                     </div>
                 )}
-                <div className="container-xl">
                     <div className="table-responsive">
                         <div className="table-wrapper">
-                            {/* <div className="table-title">
-                                <div className="row">
-                                    <div className="col-sm-5">
-                                        <h2>User <b>Management</b></h2>
-                                    </div>
-                                    <div className="col-sm-7">
-                                        <a className="btn btn-secondary"><i className="material-icons">&#xE147;</i> <span>Add New User</span></a>
-                                        <a className="btn btn-secondary"><i className="material-icons">&#xE24D;</i> <span>Export to Excel</span></a>
-                                    </div>
-                                </div>
-                            </div> */}
                             <table className="table table-striped table-hover">
                                 <thead>
                                     <tr>
@@ -56,7 +44,6 @@ export default class Home extends React.Component<RouteComponentProps, IState> {
                                         <th>Last Name</th>
                                         <th>Email</th>
                                         <th>Gender</th>
-
                                         <th>Company Name</th>
                                         <th>Department</th>
                                         <th>Actions</th>
@@ -104,22 +91,6 @@ export default class Home extends React.Component<RouteComponentProps, IState> {
                             </div> */}
                         </div>
                     </div>
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
         )
     }

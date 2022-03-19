@@ -4,13 +4,25 @@
 /* @import 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js';
 @import 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js'; */
 
+
 .form-wrapper {
   width: 500px;
   margin: 0 auto;
+  background-color: white;
+
 }
 .App {
   text-align: center;
   margin-top: 30px;
+  background-color: white;
+}
+.container-xl{
+  background-color: white;
+
+}
+.container-xl{
+  background-color: white;
+
 }
 nav {
   width: 300px;
@@ -18,6 +30,7 @@ nav {
   background: #282c34;
   height: 70px;
   line-height: 70px;
+  
 }
 nav ul li {
   display: inline;
@@ -85,15 +98,21 @@ body {
     font-family: 'Varela Round', sans-serif;
     font-size: 13px;
 }
-.table-responsive {
-    margin: 30px 0;
-}
+
 .table-wrapper {
     min-width: 1000px;
     background: #fff;
-    padding: 20px 25px;
+    /* padding: 0px 25px; */
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.title-wrapper {
+  min-width: 1000px;
+  background: #fff;
+  padding: 20px 25px;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
 .table-title {
     padding-bottom: 15px;
@@ -103,9 +122,14 @@ body {
     margin: -20px -25px 10px;
     border-radius: 3px 3px 0 0;
 }
+/* div {
+  background: white;
+
+} */
 .table-title h2 {
     margin: 5px 0 0;
     font-size: 24px;
+    
 }
 .table-title .btn {
     color: #566787;
@@ -245,10 +269,11 @@ body{
     margin-top:20px;
     color: #1a202c;
     text-align: left;
-    background-color: #e2e8f0;    
+    background-color: white;    
 }
 .main-body {
     padding: 15px;
+    background-color: white;
 }
 .card {
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);

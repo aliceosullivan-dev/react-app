@@ -11,7 +11,6 @@ export interface IValues {
         name: string,
         department: string
     }
-    // company: string,
 }
 export interface IFormState {
     [key: string]: any;

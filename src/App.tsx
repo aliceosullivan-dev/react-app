@@ -13,7 +13,7 @@ class App extends React.Component<RouteComponentProps<any>> {
       <div>
         <div className="container-xl">
           <div className="table-responsive">
-            <div className="table-wrapper">
+            <div className="table-wrapper title-wrapper">
               <div className="table-title">
                 <div className="row">
                   <div className="col-sm-5">
