@@ -7,6 +7,10 @@ export interface IValues {
     last_name: string,
     email: string,
     gender: string,
+    company:{
+        name: string,
+        department: string
+    }
     // company: string,
 }
 export interface IFormState {
@@ -24,6 +28,7 @@ class Create extends React.Component<RouteComponentProps, IFormState> {
             last_name: '',
             email: '',
             gender: '',
+            company: [{name: '',department:''}],
             // company: '',
             values: [],
             loading: false,
@@ -40,6 +45,11 @@ private processFormSubmission = (e: React.FormEvent<HTMLFormElement>): void => {
         last_name: this.state.last_name,
         email: this.state.email,
         gender: this.state.gender,
+        company: {
+            name: this.state.companyName,
+            department: this.state.companyDept
+        }
+
         // company: this.state.address,
     }
     this.setState({ submitSuccess: true, values: [...this.state.values, formData], loading: false });
@@ -62,10 +72,10 @@ public render() {
     return (
         <div>
             <div className={"col-md-12 form-wrapper"}>
-                <h2> Create Post </h2>
+                <h2> Create User </h2>
                 {!submitSuccess && (
                     <div className="alert alert-info" role="alert">
-                        Fill the form below to create a new post
+                        Fill the form below to create a new user
                 </div>
                 )}
                 {submitSuccess && (
@@ -87,17 +97,17 @@ public render() {
                         <input type="email" id="email" onChange={(e) => this.handleInputChanges(e)} name="email" className="form-control" placeholder="Enter user's email address" />
                     </div>
                     <div className="form-group col-md-12">
-                        <label htmlFor="phone"> Phone </label>
-                        <input type="text" id="phone" onChange={(e) => this.handleInputChanges(e)} name="gender" className="form-control" placeholder="Enter user's phone number" />
+                        <label htmlFor="gender"> Gender </label>
+                        <input type="text" id="gender" onChange={(e) => this.handleInputChanges(e)} name="gender" className="form-control" placeholder="Enter user's phone number" />
                     </div>
-                    {/* <div className="form-group col-md-12">
-                        <label htmlFor="address"> Address </label>
-                        <input type="text" id="address" onChange={(e) => this.handleInputChanges(e)} name="company" className="form-control" placeholder="Enter user's address" />
-                    </div> */}
-                    {/* <div className="form-group col-md-12">
-                        <label htmlFor="description"> Description </label>
-                        <input type="text" id="description" onChange={(e) => this.handleInputChanges(e)} name="description" className="form-control" placeholder="Enter Description" />
-                    </div> */}
+                    <div className="form-group col-md-12">
+                        <label htmlFor="companyName"> Company Name </label>
+                        <input type="text" id="companyName" onChange={(e) => this.handleInputChanges(e)} name="companyName" className="form-control" placeholder="Enter company name" />
+                    </div> 
+                    <div className="form-group col-md-12">
+                        <label htmlFor="companyDept"> Department </label>
+                        <input type="text" id="companyDept" onChange={(e) => this.handleInputChanges(e)} name="companyDept" className="form-control" placeholder="Enter department" />
+                    </div> 
                     <div className="form-group col-md-4 pull-right">
                         <button className="btn btn-success" type="submit">
                             Create User

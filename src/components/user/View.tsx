@@ -11,6 +11,7 @@ export interface IFormState {
     values: IValues[];
     submitSuccess: boolean;
     loading: boolean;
+    userFound: boolean;
 }
 
 
@@ -23,88 +24,116 @@ class ViewUser extends React.Component<RouteComponentProps<any>, IFormState> {
             values: [],
             loading: false,
             submitSuccess: false,
+            userFound: false
+
         }
     }
 
+    // loading spinner
+
+    // https://www.basefactor.com/react-how-to-display-a-loading-indicator-on-fetch-calls
+
     public componentDidMount(): void {
+        let userFound = false;
+
         axios.get(`http://localhost:5000/users/${this.state.id}`).then(data => {
-            this.setState({ user: data.data });
-        })
+            this.setState({ user: data.data, userFound: true });
+        })  .catch( (error) => {
+            //Handle error
+            console.log(error);
+            this.setState({userFound: false});
+
+          });
     }
 
-    private processFormSubmission = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-        e.preventDefault();
-        this.setState({ loading: true });
-        axios.patch(`http://localhost:5000/users/${this.state.id}`, this.state.values).then(data => {
-            this.setState({ submitSuccess: true, loading: false })
-            setTimeout(() => {
-                this.props.history.push('/');
-            }, 1500)
-        })
-    }
 
-    private setValues = (values: IValues) => {
-        this.setState({ values: { ...this.state.values, ...values } });
-    }
-    private handleInputChanges = (e: React.FormEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        this.setValues({ [e.currentTarget.id]: e.currentTarget.value })
-    }
+
 
     public render() {
         const { submitSuccess, loading } = this.state;
-        return (
-            <div className="App">
-                {this.state.user &&
-                    <div>
-                        < h1 > User List Management App</h1>
-                        <p> Built with React.js and TypeScript </p>
 
-                        <div>
-                            <div className={"col-md-12 form-wrapper"}>
-                                <h2> Edit User </h2>
-                                {submitSuccess && (
-                                    <div className="alert alert-info" role="alert">
-                                        User's details has been edited successfully </div>
-                                )}
-                                <form id={"create-post-form"} onSubmit={this.processFormSubmission} noValidate={true}>
-                                    <div className="form-group col-md-12">
-                                        <label htmlFor="first_name"> First Name </label>
-                                        <input type="text" id="first_name" defaultValue={this.state.user.first_name} onChange={(e) => this.handleInputChanges(e)} name="first_name" className="form-control" placeholder="Enter user's first name" />
-                                    </div>
-                                    <div className="form-group col-md-12">
-                                        <label htmlFor="last_name"> Last Name </label>
-                                        <input type="text" id="last_name" defaultValue={this.state.user.last_name} onChange={(e) => this.handleInputChanges(e)} name="last_name" className="form-control" placeholder="Enter user's last name" />
-                                    </div>
-                                    <div className="form-group col-md-12">
-                                        <label htmlFor="email"> Email </label>
-                                        <input type="email" id="email" defaultValue={this.state.user.email} onChange={(e) => this.handleInputChanges(e)} name="email" className="form-control" placeholder="Enter user's email address" />
-                                    </div>
-                                    <div className="form-group col-md-12">
-                                        <label htmlFor="phone"> Gender </label>
-                                        <input type="text" id="phone" defaultValue={this.state.user.phone} onChange={(e) => this.handleInputChanges(e)} name="phone" className="form-control" placeholder="Enter user's phone number" />
-                                    </div>
-                                    {/* <div className="form-group col-md-12">
-                                        <label htmlFor="address"> Address </label>
-                                        <input type="text" id="address" defaultValue={this.state.user.address} onChange={(e) => this.handleInputChanges(e)} name="address" className="form-control" placeholder="Enter user's address" />
-                                    </div>
-                                    <div className="form-group col-md-12">
-                                        <label htmlFor="description"> Description </label>
-                                        <input type="text" id="description" defaultValue={this.state.user.description} onChange={(e) => this.handleInputChanges(e)} name="description" className="form-control" placeholder="Enter Description" />
-                                    </div> */}
-                                    <div className="form-group col-md-4 pull-right">
-                                        <button className="btn btn-success" type="submit">
-                                            Edit User </button>
-                                        {loading &&
-                                            <span className="fa fa-circle-o-notch fa-spin" />
-                                        }
-                                    </div>
-                                </form>
+        const user = this.state.user;
+        console.log(user);
+        return (
+
+            <div>
+                {!this.state.userFound && (
+                    <div className="text-center">
+                        <h2>User not found</h2>
+                    </div>
+                )}
+
+                {this.state.userFound && this.state.user && user.name != '' && (
+                    <div className="App">
+
+                        <h1> User Details</h1>
+                        <div className="container">
+                            <div className="row">
+                                <table className="table table-bordered">
+                                    <thead className="thead-light">
+                                        <tr>
+                                            <th scope="col">First Name</th>
+                                            <th scope="col">Last Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Gender</th>
+                                            <th scope="col">Company Name </th>
+                                            <th scope="col">Department</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr key={user.id}>
+                                            <td>{user.first_name}</td>
+                                            <td>{user.last_name}</td>
+                                            <td>{user.email}</td>
+                                            <td>{user.gender}</td>
+                                            <td>{user.company.name}</td>
+                                            <td>{user.company.department}</td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     </div>
-                }
+
+
+
+
+
+
+
+                )}
             </div>
+
         )
     }
 }
