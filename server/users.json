@@ -1068,48 +1068,41 @@
       }
     },
     {
-      "id": 98,
-      "first_name": "Dredi",
-      "last_name": "Scoular",
-      "email": "dscoular2p@house.gov",
-      "gender": "Agender",
+      "first_name": "Alice",
+      "last_name": "97",
+      "email": "97@gmail.com",
+      "gender": "Female",
       "company": {
-        "name": "Twimm",
-        "department": "Services"
-      }
-    },
-    {
-      "id": 99,
-      "first_name": "Berkley",
-      "last_name": "Attrey",
-      "email": "battrey2q@comsenz.com",
-      "gender": "Genderqueer",
-      "company": {
-        "name": "Meezzy",
-        "department": "Product Management"
-      }
-    },
-    {
-      "id": 100,
-      "first_name": "Thorstein",
-      "last_name": "Assante",
-      "email": "tassante2r@nyu.edu",
-      "gender": "Agender",
-      "company": {
-        "name": "Bubbletube",
+        "name": "Cool Planet",
         "department": "Sales"
-      }
+      },
+      "id": 98,
+      "company.name": "Cool P",
+      "company.department": "Marketing"
+    },
+    {
+      "first_name": "Test",
+      "last_name": "New",
+      "email": "new@gmail.com",
+      "gender": "Female",
+      "company": {
+        "name": "Cool Planet",
+        "department": "Marketing"
+      },
+      "id": 99,
+      "company.name": "Cool Planet",
+      "company.department": "Sales"
     },
     {
       "first_name": "Alice",
-      "last_name": "O'Sullivan",
-      "email": "alice@test.com",
-      "gender": "0871234567",
+      "last_name": "New",
+      "email": "new@user.com",
+      "gender": "Female",
       "company": {
-        "name": "Bubbletube",
-        "department": "Sales"
+        "name": "Cool Planet",
+        "department": "Marketing"
       },
-      "id": 101
+      "id": 100
     }
   ]
 }

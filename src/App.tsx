@@ -3,9 +3,11 @@ import './App.css';
 import { Switch, Route, withRouter, RouteComponentProps, Link, Redirect } from 'react-router-dom';
 import Home from './components/Home';
 import Create from './components/user/Create';
-import EditUser from './components/user/Edit';
 import ViewUser from './components/user/View';
-
+import AddUser from './components/user/AddUser';
+import UserList from './components/UserList';
+import UserProfile from './components/user/UserProfile';
+import EditUser from './components/user/EditUser';
 
 class App extends React.Component<RouteComponentProps<any>> {
   public render() {
@@ -30,11 +32,23 @@ class App extends React.Component<RouteComponentProps<any>> {
         </div>
         <div>
           <Switch>
-            <Route path={'/users'} exact component={Home} />
-            <Route path={'/create'} exact component={Create} />
-            <Route path={'/users/:id/edit'} exact component={EditUser} />
-            <Route path={'/users/:id'} exact component={ViewUser} />
-            <Route path="/">{<Redirect to="/users" /> }</Route>
+            {/* <Route path="/" component={UserList}/> */}
+            <Route path={'/users'} exact component={UserList} /> 
+
+            {/* <Route path={'/users'} exact component={Home} /> */}
+            {/* <Route path={'/create'} exact component={Create} /> */}
+            <Route path={'/create'} exact component={AddUser} />
+
+            {/* <Route path={'/users/:id/edit'} exact component={EditUser} /> */}
+            <Route path="/users/:id/:edit" component={EditUser} />
+
+            <Route path="/add" component={AddUser} />
+
+            <Route path={"/users/:id"} exact component={UserProfile} />
+
+            {/* <Route path={'/users/:id'} exact component={ViewUser} /> */}
+
+            {/* <Route path="/">{<Redirect to="/users" /> }</Route> */}
           </Switch>
         </div>
       </div>
