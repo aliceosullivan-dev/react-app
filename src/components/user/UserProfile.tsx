@@ -3,8 +3,9 @@ import { Link, useParams } from 'react-router-dom';
 import UserDataService from "../../services/UserService";
 import IUserData from "../../types/userType";
 import Loader from "../loaderComponent";
+import avatarPic from '/Users/aosullivan/react-app/src/avatar.png';
 
-const UserProfile: React.FC = () => {
+function UserProfile(){
 
     type UserParams = {
         id: string;
@@ -50,7 +51,6 @@ const UserProfile: React.FC = () => {
     return (
 
         <>
-          
         <div>
                 {loading && (
                     <><h2 className="loading-text"></h2><Loader></Loader></>
@@ -74,7 +74,7 @@ const UserProfile: React.FC = () => {
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="d-flex flex-column align-items-center text-center">
-                                                    <img src="/Users/aosullivan/react-app/avatar.png" alt="Admin" className="rounded-circle" width="150">
+                                                    <img src={avatarPic} alt="Admin" className="rounded-circle" width="150">
                                                     </img>
                                                     <div className="mt-3">
                                                         <h4>{currentUser.first_name} {currentUser.last_name}</h4>

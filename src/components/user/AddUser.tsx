@@ -1,9 +1,13 @@
 import React, { useState, ChangeEvent } from "react";
 import UserDataService from "../../services/UserService"
 import IUserData from '/Users/aosullivan/react-app/src/types/userType.js';
-const AddUser: React.FC = () => {
-    const initialUserState = {
+import { useHistory } from "react-router";
 
+// const AddUser: React.FC = () => {
+function AddUser(){
+    const history = useHistory();
+
+    const initialUserState = {
         id: null,
         first_name: "",
         last_name: "",
@@ -19,15 +23,15 @@ const AddUser: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        console.log(value);
         setUser({ ...user, [name]: value });
-
+    };
+    const newUser = () => {
+        setUser(initialUserState);
+        setSubmitted(false);
     };
     const handleCompanyNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-
         setUser({
-
             ...user,
             company: {
                 name: value,
@@ -37,9 +41,7 @@ const AddUser: React.FC = () => {
     }
     const handleCompanyDeptChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-
         setUser({
-
             ...user,
             company: {
                 name: user.company.name,
@@ -47,7 +49,6 @@ const AddUser: React.FC = () => {
             }
         })
     }
-
 
     const saveUser = () => {
         var data = {
@@ -75,28 +76,26 @@ const AddUser: React.FC = () => {
                     }
                 });
                 setSubmitted(true);
+                history.push("/users");
+
                 console.log(response.data);
             })
             .catch((e: Error) => {
                 console.log(e);
             });
     };
-    const newUser = () => {
-        setUser(initialUserState);
-        setSubmitted(false);
-    };
+
     return (
-
         <>
-
             <div>
                 <div className={"col-md-12 form-wrapper"}>
                     <h2> Create User </h2>
                     {!submitted && (
-                        <div className="alert alert-info" role="alert">
+                        <div>
                             Fill the form below to create a new user
                         </div>
                     )}
+
                     {submitted && (
                         <div className="alert alert-info" role="alert">
                             The form was successfully submitted!
@@ -117,7 +116,7 @@ const AddUser: React.FC = () => {
                         </div>
                         <div className="form-group col-md-12">
                             <label htmlFor="gender"> Gender </label>
-                            <input type="text" id="gender" onChange={handleInputChange} name="gender" className="form-control" placeholder="Enter user's phone number" />
+                            <input type="text" id="gender" onChange={handleInputChange} name="gender" className="form-control" placeholder="Enter user's gender" />
                         </div>
                         <div className="form-group col-md-12">
                             <label htmlFor="company.name"> Company Name </label>
@@ -137,10 +136,6 @@ const AddUser: React.FC = () => {
                     </form>
                 </div>
             </div></>
-
-
-
-
     );
 };
 export default AddUser;

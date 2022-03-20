@@ -1,9 +1,6 @@
 import * as React from 'react';
 import './App.css';
 import { Switch, Route, withRouter, RouteComponentProps, Link, Redirect } from 'react-router-dom';
-import Home from './components/Home';
-import Create from './components/user/Create';
-import ViewUser from './components/user/View';
 import AddUser from './components/user/AddUser';
 import UserList from './components/UserList';
 import UserProfile from './components/user/UserProfile';

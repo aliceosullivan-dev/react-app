@@ -3,8 +3,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import IUserData from "../../types/userType";
 import UserDataService from "../../services/UserService";
 
-
-const EditUser: React.FC = () => {
+function EditUser(){
+// const EditUser: React.FC = () => {
     type UserParams = {
         id: string;
     };
@@ -13,9 +13,8 @@ const EditUser: React.FC = () => {
       }
 
     const { id } = useParams<UserParams>();
-    let navigate = useHistory();
+    const history = useHistory();
     const initialUserState = {
-
         id: null,
         first_name: "",
         last_name: "",
@@ -52,8 +51,9 @@ const EditUser: React.FC = () => {
         console.log("Update user id " + currentUser.id);
         UserDataService.update(currentUser.id, currentUser)
             .then((response: any) => {
-                console.log(response.data);
                 setMessage("The user was updated successfully!");
+                // history.replace('/users')
+                setSubmitted(true);
             })
             .catch((e: Error) => {
                 console.log(e);
@@ -62,18 +62,8 @@ const EditUser: React.FC = () => {
 
     const handleInputChange = (event: ChangeEvent) => {
         const { name } = event.target as HTMLButtonElement;
-        // const { target } = event
-
         const value = (event.target as HTMLInputElement).value 
-
-        console.log("Name: " + name);
-        // const { name, value } = event.currentTarget;
-        // setCurrentUser({ ...setCurrentUser, [name]: value });
-        console.log("EVENT TARGET");
-        console.log(value);
         setCurrentUser({ ...currentUser, [name]: value });
-
-
     };
 
     const handleCompanyNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -97,14 +87,9 @@ const EditUser: React.FC = () => {
         })
     }
 
-
-
-
     return (
 
-
         <>
-
             <div>
                 <div className={"col-md-12 form-wrapper"}>
                     <h2> Edit User </h2>
@@ -115,7 +100,7 @@ const EditUser: React.FC = () => {
                     )}
                     {submitted && (
                         <div className="alert alert-info" role="alert">
-                            The form was successfully submitted!
+                            The user was successfully updated!
                         </div>
                     )}
                     <form id={"create-post-form"} onSubmit={updateUser} noValidate={true}>
@@ -148,23 +133,12 @@ const EditUser: React.FC = () => {
                                 Update User
                             </button>
 
-                            {/* <button
-                                type="submit"
-                                className="badge badge-success"
-                                onClick={updateUser}
-                            >
-                                Update
-                            </button> */}
                             {loading &&
                                 <span className="fa fa-circle-o-notch fa-spin" />}
                         </div>
                     </form>
                 </div>
             </div></>
-
-
-
-
 
     );
 };

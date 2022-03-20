@@ -42,7 +42,7 @@ const UserList: React.FC = () => {
         setCurrentIndex(index);
     };
 
-    const getUser = ( id: number) => {
+    const getUser = (id: number) => {
         UserDataService.get(id)
             .then((response: any) => {
                 setCurrentUser(response.data);
@@ -50,26 +50,22 @@ const UserList: React.FC = () => {
             })
             .catch((e: Error) => {
                 console.log(e);
-              
+
             });
     };
 
     const deleteUser = (index: number) => {
-        const id = index + 2;
-        console.log(index);
-        console.log("ID: " + id);
-        console.log("DELETE USER " + id);
-        // getUser(id);
-            UserDataService.remove(id)
+        const id = index + 1;
+
+        UserDataService.remove(id)
             .then((response: any) => {
-                console.log(response.data);
-                // navigate("/users");
+                refreshList();
             })
             .catch((e: Error) => {
                 console.log(e);
             });
-        
-      };
+
+    };
 
     return (
 
@@ -89,70 +85,49 @@ const UserList: React.FC = () => {
 
                 )}
                 {!loading && (
-                <div className="table-responsive">
-                    <div className="table-wrapper">
-                        <table className="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
-                                    <th>Gender</th>
-                                    <th>Company Name</th>
-                                    <th>Department</th>
-                                    <th>Actions</th>
+                    <div className="table-responsive">
+                        <div className="table-wrapper">
+                            <table className="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email</th>
+                                        <th>Gender</th>
+                                        <th>Company Name</th>
+                                        <th>Department</th>
+                                        <th>Actions</th>
 
-                                </tr>
-                            </thead>
+                                    </tr>
+                                </thead>
 
-                            <tbody>
-                                {users && users.map((user, index) => <tr key={user.id}>
-                                    <td>{user.id}</td>
+                                <tbody>
+                                    {users && users.map((user, index) => <tr key={user.id}>
+                                        <td>{user.id}</td>
 
-                                    <td>{user.first_name}</td>
-                                    <td>{user.last_name}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.gender}</td>
-                                    <td>{user.company.name}</td>
-                                    <td>{user.company.department}</td>
-                                    <td>
-                                        <div className="d-flex justify-content-between align-items-center">
-                                            <div className="btn-group" style={{ marginBottom: "20px" }}>
-                                                <Link to={`users/${user.id}`} className="btn btn-sm btn-outline-secondary">View User </Link>
-                                                
-                                                {/* <li
-                                                    className={"list-group-item " + (index === currentIndex ? "active" : "")}
-                                                    onClick={() => setActiveTutorial(user, index)}
-                                                    key={index}
-                                                >
-                                                    {user.first_name}
-                                                </li> */}
-
-                                                <Link to={`users/${user.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit User </Link>
-                                                <button className="btn btn-sm btn-outline-secondary" onClick={() => deleteUser(index)}>Delete User</button>
+                                        <td>{user.first_name}</td>
+                                        <td>{user.last_name}</td>
+                                        <td>{user.email}</td>
+                                        <td>{user.gender}</td>
+                                        <td>{user.company.name}</td>
+                                        <td>{user.company.department}</td>
+                                        <td>
+                                            <div className="d-flex justify-content-between align-items-center">
+                                                <div className="btn-group" style={{ marginBottom: "20px" }}>
+                                                    <Link to={`users/${user.id}`} className="btn btn-sm btn-outline-secondary">View User </Link>
+                                                    <Link to={`users/${user.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit User </Link>
+                                                    <button className="btn btn-sm btn-outline-secondary" onClick={() => deleteUser(index)}>Delete User</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                )}
-                            </tbody>
+                                        </td>
+                                    </tr>
+                                    )}
+                                </tbody>
 
-                        </table>
-                        {/* <div className="clearfix">
-        <div className="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-        <ul className="pagination">
-            <li className="page-item disabled"><a href="#">Previous</a></li>
-            <li className="page-item active"><a href="#" className="page-link">1</a></li>
-            <li className="page-item"><a href="#" className="page-link">2</a></li>
-            <li className="page-item"><a href="#" className="page-link">3</a></li>
-            <li className="page-item"><a href="#" className="page-link">4</a></li>
-            <li className="page-item"><a href="#" className="page-link">5</a></li>
-            <li className="page-item"><a href="#" className="page-link">Next</a></li>
-        </ul>
-    </div> */}
+                            </table>
+                        </div>
                     </div>
-                </div>
                 )}
             </div>
 
