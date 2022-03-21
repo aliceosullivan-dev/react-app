@@ -42,7 +42,6 @@ function UserList() {
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        // handleButtonClick();
         retrieveUsers();
     }, []);
 
@@ -94,12 +93,10 @@ function UserList() {
             .then((response: any) => {
                 refreshList();
                 alert("The user was deleted successfully!");
-
             })
             .catch((e: Error) => {
                 console.log(e);
             });
-
     };
 
     return (

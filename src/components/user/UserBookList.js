@@ -31,16 +31,12 @@ function Booklist() {
 
         UserDataService.remove(userId)
             .then((response) => {
-                // refreshList();
                 sendToMachine('LOAD_BOOKS');
-
                 alert("The user was deleted successfully!");
-
             })
             .catch((e) => {
                 console.log(e);
             });
-
     };
 
     return (

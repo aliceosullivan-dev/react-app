@@ -4,9 +4,6 @@ import { assign, Machine, createMachine } from 'xstate';
 
 const fetchAllUsers = async () => {
 
-  // const res = await fetch('http://localhost:5000/users').then((x) => x.json());
-  console.log("Fetch i fetch")
-
   return await fetch(
     'http://localhost:5000/users'
   ).then((response) => response.json()).then(data => {

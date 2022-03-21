@@ -1,3 +1,7 @@
+import {map} from 'rxjs/operators';
+
+
+
 export default interface IUserData {
     id?: any | null,
     first_name: string,

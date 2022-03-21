@@ -6,6 +6,7 @@ import UserList from './components/UserList';
 import UserProfile from './components/user/UserProfile';
 import EditUser from './components/user/EditUser';
 import Booklist from './components/user/UserBookList';
+import UserListXState from './components/user/UserListXState';
 
 class App extends React.Component<RouteComponentProps<any>> {
   public render() {
@@ -43,7 +44,7 @@ class App extends React.Component<RouteComponentProps<any>> {
             <Route path="/add" component={AddUser} />
 
             <Route path={"/users/:id"} exact component={UserProfile} />
-            <Route path={"/list"} exact component={ Booklist} />
+            <Route path={"/list"} exact component={ UserListXState} />
 
             {/* <Route path={'/users/:id'} exact component={ViewUser} /> */}
 
