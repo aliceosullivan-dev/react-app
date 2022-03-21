@@ -1,17 +1,6 @@
 {
   "users": [
     {
-      "id": 1,
-      "first_name": "Wileen",
-      "last_name": "Dorricott",
-      "email": "wdorricott0@bandcamp.com",
-      "gender": "Non-binary",
-      "company": {
-        "name": "Yoveo",
-        "department": "Marketing"
-      }
-    },
-    {
       "id": 2,
       "first_name": "Leshia",
       "last_name": "Este",
@@ -1116,15 +1105,15 @@
       "id": 101
     },
     {
-      "first_name": "Alice",
-      "last_name": "Test",
-      "email": "alice@gmail.com",
-      "gender": "Female",
+      "first_name": "Tester",
+      "last_name": "27",
+      "email": "test27@gmail.com",
+      "gender": "Male",
       "company": {
         "name": "Cool Planet",
-        "department": "Engineering"
+        "department": "Sales"
       },
-      "id": 102
+      "id": 103
     }
   ]
 }

@@ -5,6 +5,7 @@ import AddUser from './components/user/AddUser';
 import UserList from './components/UserList';
 import UserProfile from './components/user/UserProfile';
 import EditUser from './components/user/EditUser';
+import Booklist from './components/user/UserBookList';
 
 class App extends React.Component<RouteComponentProps<any>> {
   public render() {
@@ -42,10 +43,11 @@ class App extends React.Component<RouteComponentProps<any>> {
             <Route path="/add" component={AddUser} />
 
             <Route path={"/users/:id"} exact component={UserProfile} />
+            <Route path={"/list"} exact component={ Booklist} />
 
             {/* <Route path={'/users/:id'} exact component={ViewUser} /> */}
 
-            {/* <Route path="/">{<Redirect to="/users" /> }</Route> */}
+            <Route path="/">{<Redirect to="/users" /> }</Route>
           </Switch>
         </div>
       </div>

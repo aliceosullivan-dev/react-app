@@ -1,7 +1,8 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import IUserData from "../../types/userType";
 import UserDataService from "../../services/UserService";
+import Alert from 'react-bootstrap/Alert';
 
 function EditUser(){
 // const EditUser: React.FC = () => {
@@ -31,12 +32,10 @@ function EditUser(){
     const [loading, setLoading] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
 
-
     const getUser = (id: string) => {
         UserDataService.get(id)
             .then((response: any) => {
                 setCurrentUser(response.data);
-                console.log(response.data);
             })
             .catch((e: Error) => {
                 console.log(e);
@@ -45,15 +44,17 @@ function EditUser(){
     useEffect(() => {
         if (id)
             getUser(id);
-    }, [id]);
+    }, [id])// Only re-run the effect if id changes;
+
 
     const updateUser = () => {
-        console.log("Update user id " + currentUser.id);
         UserDataService.update(currentUser.id, currentUser)
             .then((response: any) => {
                 setMessage("The user was updated successfully!");
-                // history.replace('/users')
                 setSubmitted(true);
+                alert("The user was updated successfully!");
+                setTimeout(() => {  console.log("World!"); }, 1200000);
+
             })
             .catch((e: Error) => {
                 console.log(e);
@@ -93,17 +94,18 @@ function EditUser(){
             <div>
                 <div className={"col-md-12 form-wrapper"}>
                     <h2> Edit User </h2>
-                    {!submitted && (
+                    {/* {!submitted && (
                         <div className="alert alert-info" role="alert">
                             Fill the form below to edit the user's details
                         </div>
-                    )}
+                    )} */}
                     {submitted && (
-                        <div className="alert alert-info" role="alert">
+                        <><div className="alert alert-info" role="alert">
                             The user was successfully updated!
-                        </div>
+                        </div> <Alert show = {submitted} onClose={() => {}} dismissible>The user was successfully updated!</Alert>
+</>
                     )}
-                    <form id={"create-post-form"} onSubmit={updateUser} noValidate={true}>
+                    <form id={"create-post-form"} noValidate={true}>
                         <div className="form-group col-md-12">
                             <label htmlFor="first_name"> First Name </label>
                             <input type="text" id="first_name" onChange={handleInputChange} name="first_name" className="form-control" placeholder={currentUser.first_name}/>
@@ -129,9 +131,11 @@ function EditUser(){
                             <input type="text" id="company.department" onChange={handleCompanyDeptChange} name="company.department" className="form-control" placeholder={currentUser.company.department} />
                         </div>
                         <div className="form-group col-md-4 pull-right">
-                            <button className="btn btn-success" type="submit" onClick={updateUser}>
+                            {/* <button className="btn btn-success" type="submit">
                                 Update User
-                            </button>
+                            </button> */}
+
+                            <Link onClick={updateUser} className="btn btn-success" to={'/./'}>Update User </Link>
 
                             {loading &&
                                 <span className="fa fa-circle-o-notch fa-spin" />}

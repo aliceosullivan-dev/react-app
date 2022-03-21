@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent } from "react";
 import UserDataService from "../../services/UserService"
 import IUserData from '/Users/aosullivan/react-app/src/types/userType.js';
 import { useHistory } from "react-router";
+import { Link } from 'react-router-dom';
 
 // const AddUser: React.FC = () => {
 function AddUser(){
@@ -76,7 +77,9 @@ function AddUser(){
                     }
                 });
                 setSubmitted(true);
-                history.push("/users");
+                alert("The user was created successfully!");
+
+                // history.push("/./");
 
                 console.log(response.data);
             })
@@ -127,9 +130,11 @@ function AddUser(){
                             <input type="text" id="company.department" onChange={handleCompanyDeptChange} name="company.department" className="form-control" placeholder="Enter department" />
                         </div>
                         <div className="form-group col-md-4 pull-right">
-                            <button className="btn btn-success" type="submit">
+                            {/* <button className="btn btn-success" type="submit">
                                 Create User
-                            </button>
+                            </button> */}
+                            <Link onClick={saveUser} className="btn btn-success" to={'/./'}>Create User </Link>
+
                             {loading &&
                                 <span className="fa fa-circle-o-notch fa-spin" />}
                         </div>
