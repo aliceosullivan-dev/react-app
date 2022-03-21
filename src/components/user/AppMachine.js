@@ -2,10 +2,7 @@ import { createContext } from 'react';
 import { assign, Machine, createMachine } from 'xstate';
 
 
-import fetchAllBooks from './fetchBooks';
-// export const MachineContext = createContext('BookContext');
-
-const fetchifetch = async () => {
+const fetchAllUsers = async () => {
 
   // const res = await fetch('http://localhost:5000/users').then((x) => x.json());
   console.log("Fetch i fetch")
@@ -16,42 +13,17 @@ const fetchifetch = async () => {
     if (data.message) {
       return
     }
-    console.log("TESTING DATA" + data);
-    console.log(data[0]);
+
     return data
-  });//.then(data => data.value);
-
-  // return await 'http://localhost:5000/users'.get<Array<IUserData>>("/").then((response)=> response.data)
+  });
 };
-
-function getUserBooks(context) {
-  const { books } = context.books;
-
-  return Promise.all(
-    books.map((bookId) =>
-      fetch(`http://localhost:5000/users/${bookId}/`).then((response) => response.json())
-    )
-  );
-}
-
-// UserDataService.getAll()
-//             .then((response: any) => {
-//                 setUsers(response.data);
-//                 console.log(response.data);
-//                 setLoading(false);
-//             })
-//             .catch((e: Error) => {
-//                 console.log(e);
-//                 setLoading(false);
-
-//             });
 
 
 export const appMachine = createMachine({
   id: 'app',
   initial: 'init',
   context: {
-    books: [],
+    users: [],
     error: undefined,
     fields: '',
   },
@@ -62,29 +34,15 @@ export const appMachine = createMachine({
       states: {
         loading: {
           invoke: {
-            // src: (context, event) => fetchifetch(),
-            // onDone: {
-            //   target: 'success',
-            //   actions: assign({ books: (context, event) => event.data }),
-            // },
-            
             src: (context, event) => async (send) => {
               return new Promise((resolve, reject) => {
                 setTimeout(async () => {
                   try {
-                    console.log("Fetching...")
-                    console.log("HELLOOO")
-                    const data = await fetchifetch();
-                    // const data = await getUserBooks();
 
-                    // .get<Array<IUserData>>("/");
-                    console.log("PROMISE data" + data[0].first_name);
+                    const data = await fetchAllUsers();
                     resolve(data);
-                    // resolve(data);
                     assign({
-                      // books: (context, event) => [...context.books, data],
-                      books: (context, event) => data
-
+                      users: (context, event) => data
                     })
                     // console.log("Data " + JSON.parse(data));
                   } catch (err) {
@@ -95,7 +53,7 @@ export const appMachine = createMachine({
             },
             onDone: {
               target: "success",
-              actions: assign({ books: (_context, event) => event.data })
+              actions: assign({ users: (_context, event) => event.data })
             },
             onError: {
               target: "idle"
@@ -108,7 +66,6 @@ export const appMachine = createMachine({
           }
         },
         success: {
-          data: ctx => ctx.books
         },
         failed: {},
         idle: {},
@@ -124,8 +81,7 @@ export const appMachine = createMachine({
     LOAD_BOOKS: {
       target: 'list.loading',
       actions: assign({
-        actions: assign({ books: (context, event) => event.data }),
-        // books: (context, event) => event.data
+        actions: assign({ users: (context, event) => event.data }),
 
       })
     },

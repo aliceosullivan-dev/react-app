@@ -1053,67 +1053,8 @@
       "gender": "Polygender",
       "company": {
         "name": "Vinder",
-        "department": "Training"
+        "department": "Sales"
       }
-    },
-    {
-      "first_name": "Alice",
-      "last_name": "97",
-      "email": "97@gmail.com",
-      "gender": "Female",
-      "company": {
-        "name": "Cool Planet",
-        "department": "Sales"
-      },
-      "id": 98,
-      "company.name": "Cool P",
-      "company.department": "Marketing"
-    },
-    {
-      "first_name": "Test",
-      "last_name": "New",
-      "email": "new@gmail.com",
-      "gender": "Female",
-      "company": {
-        "name": "Cool Planet",
-        "department": "Marketing"
-      },
-      "id": 99,
-      "company.name": "Cool Planet",
-      "company.department": "Sales"
-    },
-    {
-      "first_name": "Alice",
-      "last_name": "New",
-      "email": "new@user.com",
-      "gender": "Female",
-      "company": {
-        "name": "Cool Planet",
-        "department": "Marketing"
-      },
-      "id": 100
-    },
-    {
-      "first_name": "Keelin",
-      "last_name": "OSullivan",
-      "email": "keelin@test.com",
-      "gender": "Female",
-      "company": {
-        "name": "Cool Planet",
-        "department": "Engineering"
-      },
-      "id": 101
-    },
-    {
-      "first_name": "Tester",
-      "last_name": "27",
-      "email": "test27@gmail.com",
-      "gender": "Male",
-      "company": {
-        "name": "Cool Planet",
-        "department": "Sales"
-      },
-      "id": 103
     }
   ]
 }

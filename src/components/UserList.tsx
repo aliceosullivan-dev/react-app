@@ -152,7 +152,7 @@ function UserList() {
                                                 <div className="btn-group" style={{ marginBottom: "20px" }}>
                                                     <Link to={`users/${user.id}`} className="btn btn-sm btn-outline-secondary">View User </Link>
                                                     <Link to={`users/${user.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit User </Link>
-                                                    <button className="btn btn-sm btn-outline-secondary" onClick={() => deleteUser(index)}>Delete User</button>
+                                                    <button className="btn btn-sm btn-outline-secondary delete" onClick={() => deleteUser(index)}>Delete User</button>
                                                 </div>
                                             </div>
                                         </td>
