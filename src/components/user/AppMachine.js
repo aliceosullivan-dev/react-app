@@ -34,6 +34,19 @@ function getUserBooks(context) {
   );
 }
 
+// UserDataService.getAll()
+//             .then((response: any) => {
+//                 setUsers(response.data);
+//                 console.log(response.data);
+//                 setLoading(false);
+//             })
+//             .catch((e: Error) => {
+//                 console.log(e);
+//                 setLoading(false);
+
+//             });
+
+
 export const appMachine = createMachine({
   id: 'app',
   initial: 'init',
@@ -49,39 +62,41 @@ export const appMachine = createMachine({
       states: {
         loading: {
           invoke: {
-            src: (context, event) => fetchifetch(),
-            onDone: {
-              target: 'success',
-              actions: assign({ books: (context, event) => event.data }),
-            },
-            // src: (context, event) => async (send) => {
-            //   return new Promise((resolve, reject) => {
-            //     setTimeout(async () => {
-            //       try {
-            //         console.log("Fetching...")
-            //         console.log("HELLOOO")
-            //         const data = await fetchifetch();
-            //         // const data = await getUserBooks();
-
-            //         // .get<Array<IUserData>>("/");
-            //         console.log(data);
-            //         // resolve(data);
-            //         assign({
-            //           books: (context, event) => [...context.books, data],
-            //           // books: (context, event) => event.data
-
-            //         })
-            //         // console.log("Data " + JSON.parse(data));
-            //       } catch (err) {
-            //         reject(err);
-            //       }
-            //     }, 0);
-            //   });
-            // },
+            // src: (context, event) => fetchifetch(),
             // onDone: {
-            //   target: "success",
-            //   actions: assign({ books: (_context, event) => event.data })
+            //   target: 'success',
+            //   actions: assign({ books: (context, event) => event.data }),
             // },
+            
+            src: (context, event) => async (send) => {
+              return new Promise((resolve, reject) => {
+                setTimeout(async () => {
+                  try {
+                    console.log("Fetching...")
+                    console.log("HELLOOO")
+                    const data = await fetchifetch();
+                    // const data = await getUserBooks();
+
+                    // .get<Array<IUserData>>("/");
+                    console.log("PROMISE data" + data[0].first_name);
+                    resolve(data);
+                    // resolve(data);
+                    assign({
+                      // books: (context, event) => [...context.books, data],
+                      books: (context, event) => data
+
+                    })
+                    // console.log("Data " + JSON.parse(data));
+                  } catch (err) {
+                    reject(err);
+                  }
+                }, 0);
+              });
+            },
+            onDone: {
+              target: "success",
+              actions: assign({ books: (_context, event) => event.data })
+            },
             onError: {
               target: "idle"
             }
@@ -93,7 +108,7 @@ export const appMachine = createMachine({
           }
         },
         success: {
-          actions: assign({ books: (context, event) => event.data }),
+          data: ctx => ctx.books
         },
         failed: {},
         idle: {},
