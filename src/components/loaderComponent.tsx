@@ -4,7 +4,7 @@ import React from "react";
 const Loader = () => {
     return (
         
-        <div className="spinner-border text-primary" role="status">
+        <div className="spinner-border" role="status">
                 <span className="sr-only"></span>
             </div>
     );

@@ -1,7 +1,5 @@
 import IUserData from '/Users/aosullivan/react-app/src/types/userType.js';
 import http from '../httpCommon'
-// import ITutorialData from "../types/Tutorial";
-
 
 const getAll = () => {
     return http.get<Array<IUserData>>("/");

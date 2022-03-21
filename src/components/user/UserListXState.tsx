@@ -1,46 +1,42 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { appMachine } from './AppMachine';
+import React, { useEffect, useState } from 'react';
+import { appMachine } from '../../state/AppMachine';
 import { useMachine } from '@xstate/react';
 import Loader from '../loaderComponent';
 import UserDataService from '../../services/UserService';
-// import { Deleteicon } from './Deleteicon';
-
-import IUserData from '../../types/userType'
+import IUserData from '../../types/userType';
 import { Link } from 'react-router-dom';
-import { Observable } from 'rxjs';
 
 function UserListXState() {
 
-
-    // const [users,setUsers] = useState('');
-    // const [users, setUsers] = useState<xIUserData>();
     const [users, setUsers] = useState<Array<IUserData>>([]);
-
     const [state, sendToMachine] = useMachine(appMachine);
     const isLoading = state.matches('list.loading')
     const list = state.context.users;
-    // const list = users;
-
 
     useEffect(() => {
-        sendToMachine('LOAD_BOOKS');
-        // setUsers(state.context.users);
+        sendToMachine('LOAD_USERS');
     }, []);
 
+if(users){}
+// @ts-ignore: Object is possibly 'null'.
 
-    const handleButtonClick = () => {
-        // send('FETCH')
-        console.log(state.context.users);
-    }
+
+// const stateUIMapping = {
+//     loading: <p>Loading</p>,
+//     success: users!.map((user) => <div key={user.id}>{user!.name}</div>),
+//     error: <p>An error occured</p>
+// };
+
+// const output = stateUIMapping[state];
+
 
     const deleteUser = (index: number) => {
-
+        console.log("index " + index)
         let userId: number = list.at(index)!.id;
-    
-        // const userId = 100;
+        console.log("Deleting user id: " + userId);
         UserDataService.remove(userId)
             .then((response) => {
-                sendToMachine('LOAD_BOOKS');
+                sendToMachine('LOAD_USERS');
                 alert("The user was deleted successfully!");
             })
             .catch((e) => {
@@ -50,12 +46,7 @@ function UserListXState() {
 
     return (
         <>
-
-
-
             <>
-
-
                 <div className="container-xl">
                     {list.length === 0 && !isLoading && (
                         <div className="text-center">
@@ -86,10 +77,8 @@ function UserListXState() {
                                     </thead>
 
                                     <tbody>
-                                        {/* //list.map((user, i) => */}
-                                        {list && list.map((user:IUserData,index:number) => <tr key={user.id}>
+                                        {list && list.map((user: IUserData, index: number) => <tr key={user.id}>
                                             <td>{user.id}</td>
-
                                             <td>{user.first_name}</td>
                                             <td>{user.last_name}</td>
                                             <td>{user.email}</td>
@@ -101,7 +90,9 @@ function UserListXState() {
                                                     <div className="btn-group" style={{ marginBottom: "20px" }}>
                                                         <Link to={`users/${user.id}`} className="btn btn-sm btn-outline-secondary">View User </Link>
                                                         <Link to={`users/${user.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit User </Link>
-                                                        <button className="btn btn-sm btn-outline-secondary" onClick={() => deleteUser(index)}>Delete User</button>
+                                                        <Link to={''} className="btn btn-sm btn-outline-secondary delete" onClick={() => deleteUser(index)}>Delete User </Link>
+
+                                                        {/* <button className="btn btn-sm btn-outline-secondary" onClick={() => deleteUser(index)}>Delete User</button> */}
                                                     </div>
                                                 </div>
                                             </td>

@@ -13,4 +13,3 @@ export default interface IUserData {
         department: string
     }
   }
-  // https://www.bezkoder.com/react-typescript-api-call/#List_of_Objects_Component

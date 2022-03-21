@@ -1,13 +1,9 @@
 import React, { useState, ChangeEvent } from "react";
 import UserDataService from "../../services/UserService"
 import IUserData from '/Users/aosullivan/react-app/src/types/userType.js';
-import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
 
-// const AddUser: React.FC = () => {
 function AddUser(){
-    const history = useHistory();
-
     const initialUserState = {
         id: null,
         first_name: "",
@@ -19,16 +15,20 @@ function AddUser(){
             department: ""
         }
     };
+
+    // Local state management
     const [user, setUser] = useState<IUserData>(initialUserState);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        setUser({ ...user, [name]: value });
-    };
+
+
     const newUser = () => {
         setUser(initialUserState);
         setSubmitted(false);
+    };
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        setUser({ ...user, [name]: value });
     };
     const handleCompanyNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -52,6 +52,7 @@ function AddUser(){
     }
 
     const saveUser = () => {
+        setLoading(true);
         var data = {
             first_name: user.first_name,
             last_name: user.last_name,
@@ -76,12 +77,9 @@ function AddUser(){
                         department: response.data.company.department
                     }
                 });
+                setLoading(false);
                 setSubmitted(true);
                 alert("The user was created successfully!");
-
-                // history.push("/./");
-
-                console.log(response.data);
             })
             .catch((e: Error) => {
                 console.log(e);
@@ -94,8 +92,8 @@ function AddUser(){
                 <div className={"col-md-12 form-wrapper"}>
                     <h2> Create User </h2>
                     {!submitted && (
-                        <div>
-                            Fill the form below to create a new user
+                        <div className="alert " role="alert">
+                            Fill in the form below to create a new user
                         </div>
                     )}
 
@@ -130,11 +128,7 @@ function AddUser(){
                             <input type="text" id="company.department" onChange={handleCompanyDeptChange} name="company.department" className="form-control" placeholder="Enter department" />
                         </div>
                         <div className="form-group col-md-4 pull-right">
-                            {/* <button className="btn btn-success" type="submit">
-                                Create User
-                            </button> */}
                             <Link onClick={saveUser} className="btn btn-success" to={'/./'}>Create User </Link>
-
                             {loading &&
                                 <span className="fa fa-circle-o-notch fa-spin" />}
                         </div>

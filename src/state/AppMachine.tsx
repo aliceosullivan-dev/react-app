@@ -1,9 +1,8 @@
-import { createContext } from 'react';
-import { assign, Machine, createMachine } from 'xstate';
+// import { createContext } from 'react';
+import { assign, createMachine } from 'xstate';
 
 
 const fetchAllUsers = async () => {
-
   return await fetch(
     'http://localhost:5000/users'
   ).then((response) => response.json()).then(data => {
@@ -35,13 +34,11 @@ export const appMachine = createMachine({
               return new Promise((resolve, reject) => {
                 setTimeout(async () => {
                   try {
-
                     const data = await fetchAllUsers();
                     resolve(data);
                     assign({
                       users: (context, event) => data
                     })
-                    // console.log("Data " + JSON.parse(data));
                   } catch (err) {
                     reject(err);
                   }
@@ -75,12 +72,8 @@ export const appMachine = createMachine({
     },
   },
   on: {
-    LOAD_BOOKS: {
+    LOAD_USERS: {
       target: 'list.loading',
-      actions: assign({
-        actions: assign({ users: (context, event) => event.data }),
-
-      })
     },
 
   },

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import UserDataService from "../../services/UserService";
 import IUserData from "../../types/userType";
@@ -28,28 +28,25 @@ function UserProfile(){
     const [userFound, setUserFound] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const getTutorial = (id: string) => {
+    const getUser = (id: string) => {
         UserDataService.get(id)
             .then((response: any) => {
                 setCurrentUser(response.data);
-                console.log(response.data);
                 setUserFound(true);
                 setLoading(false);
             })
             .catch((e: Error) => {
                 console.log(e);
-                console.log(e.message);
                 setUserFound(false);
                 setLoading(false);                
             });
     };
     useEffect(() => {
         if (id)
-            getTutorial(id);
+            getUser(id);
     }, [id]);
 
     return (
-
         <>
         <div>
                 {loading && (
@@ -61,14 +58,12 @@ function UserProfile(){
                         <h2>User not found</h2>
                     </div>
                 )} 
-
-                { !loading && userFound && currentUser && currentUser.first_name != '' && (
+                { !loading && userFound && currentUser && currentUser.first_name !== '' && (
 
                     <div className="App">
                         <h1> User Details</h1>
                         <div className="container">
                             <div className="main-body">
-
                                 <div className="row gutters-sm">
                                     <div className="col-md-4 mb-3">
                                         <div className="card">
@@ -146,14 +141,11 @@ function UserProfile(){
                                                 <hr />
                                                 <div className="row">
                                                     <div className="col-sm-12">
-
-                                                        <Link to={`/users/${currentUser.id}/edit`} className="btn btn-info">Edit</Link>
+                                                        <Link to={`/users/${currentUser.id}/edit`} className="btn btn-secondary">Edit</Link>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>

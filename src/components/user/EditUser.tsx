@@ -1,20 +1,14 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import IUserData from "../../types/userType";
 import UserDataService from "../../services/UserService";
 import Alert from 'react-bootstrap/Alert';
 
 function EditUser(){
-// const EditUser: React.FC = () => {
     type UserParams = {
         id: string;
     };
-    type HTMLElementEvent<T extends HTMLElement> = Event & {
-        target: T;
-      }
-
     const { id } = useParams<UserParams>();
-    const history = useHistory();
     const initialUserState = {
         id: null,
         first_name: "",
@@ -27,7 +21,6 @@ function EditUser(){
         }
     };
     const [currentUser, setCurrentUser] = useState<IUserData>(initialUserState);
-
     const [message, setMessage] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
@@ -44,8 +37,7 @@ function EditUser(){
     useEffect(() => {
         if (id)
             getUser(id);
-    }, [id])// Only re-run the effect if id changes;
-
+    }, [id])
 
     const updateUser = () => {
         UserDataService.update(currentUser.id, currentUser)
@@ -53,8 +45,6 @@ function EditUser(){
                 setMessage("The user was updated successfully!");
                 setSubmitted(true);
                 alert("The user was updated successfully!");
-                setTimeout(() => {  console.log("World!"); }, 1200000);
-
             })
             .catch((e: Error) => {
                 console.log(e);
@@ -89,16 +79,15 @@ function EditUser(){
     }
 
     return (
-
         <>
             <div>
                 <div className={"col-md-12 form-wrapper"}>
                     <h2> Edit User </h2>
-                    {/* {!submitted && (
+                    {!submitted && (
                         <div className="alert alert-info" role="alert">
                             Fill the form below to edit the user's details
                         </div>
-                    )} */}
+                    )}
                     {submitted && (
                         <><div className="alert alert-info" role="alert">
                             The user was successfully updated!
@@ -131,12 +120,7 @@ function EditUser(){
                             <input type="text" id="company.department" onChange={handleCompanyDeptChange} name="company.department" className="form-control" placeholder={currentUser.company.department} />
                         </div>
                         <div className="form-group col-md-4 pull-right">
-                            {/* <button className="btn btn-success" type="submit">
-                                Update User
-                            </button> */}
-
                             <Link onClick={updateUser} className="btn btn-success" to={'/./'}>Update User </Link>
-
                             {loading &&
                                 <span className="fa fa-circle-o-notch fa-spin" />}
                         </div>

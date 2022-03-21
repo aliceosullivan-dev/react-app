@@ -9,7 +9,18 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.]
+
+
+Open http://localhost:3000/users to view the User List screen
+Open http://localhost:3000/users/:id to view the User Detail screen for a particular user id 
+
+
+The server must also be running, you can run:
+### `yarn server`
+to start the server on http://localhost:5000
+This watches the users.json file
+
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
