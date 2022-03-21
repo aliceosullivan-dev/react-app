@@ -102,7 +102,6 @@ body {
 }
 .table-title {
     padding-bottom: 15px;
-    /* background: #299be4; */
     background: #032756;
     color: #fff;
     padding: 16px 30px;
@@ -120,8 +119,6 @@ body {
     background: #7AE070;
     border-color: #13E000;
     color: #022756;
-
-
 }
 .table-title .btn {
     font-weight: bold;
@@ -157,8 +154,6 @@ body {
     float: left;
     font-size: 21px;
     margin-right: 5px;
-    /* color: #13E000; */
-
 }
 .table-title .btn span {
     float: left;
@@ -277,7 +272,6 @@ table.table .avatar {
 
 /* user card*/
 body{
-    /* margin-top:20px; */
     color: #1a202c;
     text-align: left;
     background-color: white;    
