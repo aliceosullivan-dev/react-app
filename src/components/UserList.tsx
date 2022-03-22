@@ -46,16 +46,6 @@ function UserList() {
         setCurrentIndex(-1);
     };
 
-    const getUser = (id: number) => {
-        UserDataService.get(id)
-            .then((response: any) => {
-                setCurrentUser(response.data);
-            })
-            .catch((e: Error) => {
-                console.log(e);
-            });
-    };
-
     const deleteUser = (index: number) => {
         let userId: number = users.at(index)!.id;
         UserDataService.remove(userId)
@@ -102,7 +92,6 @@ function UserList() {
                                 <tbody>
                                     {users && users.map((user, index) => <tr key={user.id}>
                                         <td>{user.id}</td>
-
                                         <td>{user.first_name}</td>
                                         <td>{user.last_name}</td>
                                         <td>{user.email}</td>
