@@ -185,6 +185,7 @@ table.table td:last-child i {
     opacity: 0.9;
     font-size: 22px;
     margin: 0 5px;
+    text-align: left;
 }
 table.table td a {
     font-weight: bold;
@@ -207,11 +208,17 @@ table.table td a.delete:hover {
 }
 table.table td i {
     font-size: 19px;
+    text-align: center;
+
 }
 table.table .avatar {
     border-radius: 50%;
     vertical-align: middle;
     margin-right: 10px;
+}
+.table {
+    text-align: center;
+
 }
 .status {
     font-size: 30px;
