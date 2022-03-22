@@ -50,7 +50,7 @@ export const appMachine = createMachine({
               actions: assign({ users: (_context, event) => event.data })
             },
             onError: {
-              target: "idle"
+              target: "failed"
             }
           },
           on: {
@@ -60,6 +60,7 @@ export const appMachine = createMachine({
           }
         },
         success: {
+          on: { FETCH: 'loading' }
         },
         failed: {},
         idle: {},

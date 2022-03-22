@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import UserDataService from "../../services/UserService"
 import IUserData from '/Users/aosullivan/react-app/src/types/userType.js';
 import { Link } from 'react-router-dom';
@@ -51,6 +51,15 @@ function AddUser(){
         })
     }
 
+    useEffect(() => {
+        // return function cleanup(){
+
+        // }
+        return () => {
+          };
+    }, [])
+
+
     const saveUser = () => {
         setLoading(true);
         var data = {
@@ -64,6 +73,8 @@ function AddUser(){
             }
 
         };
+        const ac = new AbortController();
+
         UserDataService.create(data)
             .then((response: any) => {
                 setUser({
@@ -84,6 +95,8 @@ function AddUser(){
             .catch((e: Error) => {
                 console.log(e);
             });
+
+            return () => ac.abort(); // Abort both fetches on unmount
     };
 
     return (
