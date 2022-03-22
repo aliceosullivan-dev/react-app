@@ -59,10 +59,6 @@ function UserListXState() {
                                             <th>#</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
-                                            <th>Email</th>
-                                            <th>Gender</th>
-                                            <th>Company Name</th>
-                                            <th>Department</th>
                                             <th>Actions</th>
 
                                         </tr>
@@ -73,10 +69,6 @@ function UserListXState() {
                                             <td>{user.id}</td>
                                             <td>{user.first_name}</td>
                                             <td>{user.last_name}</td>
-                                            <td>{user.email}</td>
-                                            <td>{user.gender}</td>
-                                            <td>{user.company.name}</td>
-                                            <td>{user.company.department}</td>
                                             <td>
                                                 <div className="d-flex justify-content-between align-items-center">
                                                     <div className="btn-group" style={{ marginBottom: "20px" }}>
