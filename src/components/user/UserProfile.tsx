@@ -5,7 +5,7 @@ import IUserData from "../../types/userType";
 import Loader from "../loaderComponent";
 import avatarPic from '/Users/aosullivan/react-app/src/avatar.png';
 
-function UserProfile(){
+function UserProfile() {
 
     type UserParams = {
         id: string;
@@ -38,7 +38,7 @@ function UserProfile(){
             .catch((e: Error) => {
                 console.log(e);
                 setUserFound(false);
-                setLoading(false);                
+                setLoading(false);
             });
     };
     useEffect(() => {
@@ -48,7 +48,7 @@ function UserProfile(){
 
     return (
         <>
-        <div>
+            <div>
                 {loading && (
                     <><h2 className="loading-text"></h2><Loader></Loader></>
 
@@ -57,8 +57,8 @@ function UserProfile(){
                     <div className="text-center">
                         <h2>User not found</h2>
                     </div>
-                )} 
-                { !loading && userFound && currentUser && currentUser.first_name !== '' && (
+                )}
+                {!loading && userFound && currentUser && currentUser.first_name !== '' && (
 
                     <div className="App">
                         <h1> User Details</h1>

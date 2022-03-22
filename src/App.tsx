@@ -18,13 +18,12 @@ class App extends React.Component<RouteComponentProps<any>> {
               <div className="table-title">
                 <div className="row">
                   <div className="col-sm-5">
-                  <img src={CoolPlanetLogo} alt="Admin" width="150">
-                                                    </img>
+                    <img src={CoolPlanetLogo} alt="Admin" width="150">
+                    </img>
                     <h2><Link to={'/users'}> User Management </Link></h2>
                   </div>
                   <div className="col-sm-7">
                     <Link to={'/create'} className="header-link btn btn-secondary"> Create User </Link>
-
                   </div>
                 </div>
               </div>
@@ -37,8 +36,8 @@ class App extends React.Component<RouteComponentProps<any>> {
             <Route path="/users/:id/:edit" component={EditUser} />
             <Route path="/add" component={AddUser} />
             <Route path={"/users/:id"} exact component={UserProfile} />
-            <Route path={"/users"} exact component={ UserListXState} />
-            <Route path="/">{<Redirect to="/users" /> }</Route>
+            <Route path={"/users"} exact component={UserListXState} />
+            <Route path="/">{<Redirect to="/users" />}</Route>
 
           </Switch>
         </div>

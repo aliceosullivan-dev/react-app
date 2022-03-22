@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { appMachine } from '../../state/AppMachine';
 import { useMachine } from '@xstate/react';
 import Loader from '../loaderComponent';
@@ -12,31 +12,23 @@ function UserListXState() {
     const [state, sendToMachine] = useMachine(appMachine);
     const isLoading = state.matches('list.loading')
     const list = state.context.users;
+    const componentMounted = useRef(true); // component is mounted
 
     useEffect(() => {
         sendToMachine('LOAD_USERS');
+        return () => {
+            // This code runs when component is unmounted
+            componentMounted.current = false; // set it to false when we leave the page
+        }
     }, []);
 
-if(users){}
-// @ts-ignore: Object is possibly 'null'.
-
-
-// const stateUIMapping = {
-//     loading: <p>Loading</p>,
-//     success: users!.map((user) => <div key={user.id}>{user!.name}</div>),
-//     error: <p>An error occured</p>
-// };
-
-// const output = stateUIMapping[state];
+    if (users) { }
 
 
     const deleteUser = (index: number) => {
-        console.log("index " + index)
         let userId: number = list.at(index)!.id;
-        console.log("Deleting user id: " + userId);
         UserDataService.remove(userId)
             .then((response) => {
-                sendToMachine('LOAD_USERS');
                 alert("The user was deleted successfully!");
             })
             .catch((e) => {
@@ -91,8 +83,6 @@ if(users){}
                                                         <Link to={`users/${user.id}`} className="btn btn-sm btn-outline-secondary">View User </Link>
                                                         <Link to={`users/${user.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit User </Link>
                                                         <Link to={''} className="btn btn-sm btn-outline-secondary delete" onClick={() => deleteUser(index)}>Delete User </Link>
-
-                                                        {/* <button className="btn btn-sm btn-outline-secondary" onClick={() => deleteUser(index)}>Delete User</button> */}
                                                     </div>
                                                 </div>
                                             </td>
@@ -105,18 +95,8 @@ if(users){}
                         </div>
                     )}
                 </div>
-
-
-
             </>
-
-
-
         </>
-
-
-
-
     );
 }
 

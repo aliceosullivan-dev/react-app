@@ -1099,17 +1099,6 @@
         "name": "Bubbletube",
         "department": "Sales"
       }
-    },
-    {
-      "first_name": "Tester",
-      "last_name": "97",
-      "email": "97@gmail.com",
-      "gender": "Female",
-      "company": {
-        "name": "Cool P",
-        "department": "Engineering"
-      },
-      "id": 101
     }
   ]
 }

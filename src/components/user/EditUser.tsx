@@ -24,7 +24,7 @@ function EditUser() {
     const [message, setMessage] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
-    const componentMounted = useRef(true); // (3) component is mounted
+    const componentMounted = useRef(true); // component is mounted
 
     const getUser = (id: string) => {
         UserDataService.get(id)
@@ -38,10 +38,6 @@ function EditUser() {
     useEffect(() => {
         if (id)
             getUser(id);
-
-        return () => { // This code runs when component is unmounted
-            componentMounted.current = false; // (4) set it to false when we leave the page
-        }
     }, [id])
 
     const updateUser = () => {

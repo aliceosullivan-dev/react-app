@@ -1,9 +1,9 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
+import React, { useState, ChangeEvent, useEffect, useRef } from "react";
 import UserDataService from "../../services/UserService"
 import IUserData from '/Users/aosullivan/react-app/src/types/userType.js';
 import { Link } from 'react-router-dom';
 
-function AddUser(){
+function AddUser() {
     const initialUserState = {
         id: null,
         first_name: "",
@@ -20,6 +20,7 @@ function AddUser(){
     const [user, setUser] = useState<IUserData>(initialUserState);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
+    const componentMounted = useRef(true); // component is mounted
 
 
     const newUser = () => {
@@ -52,11 +53,10 @@ function AddUser(){
     }
 
     useEffect(() => {
-        // return function cleanup(){
-
-        // }
         return () => {
-          };
+            // This code runs when component is unmounted
+            componentMounted.current = false; // set it to false when we leave the page
+        }
     }, [])
 
 
@@ -96,7 +96,7 @@ function AddUser(){
                 console.log(e);
             });
 
-            return () => ac.abort(); // Abort both fetches on unmount
+        return () => ac.abort(); // Abort both fetches on unmount
     };
 
     return (

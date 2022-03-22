@@ -14,7 +14,6 @@ const update = (id: any, data: IUserData) => {
     return http.put<any>(`/${id}`, data);
 };
 const remove = (id: any) => {
-    console.log("Remove user " + id);
     return http.delete<any>(`/${id}`);
 };
 
