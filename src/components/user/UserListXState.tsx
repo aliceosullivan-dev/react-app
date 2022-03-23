@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 function UserListXState() {
 
-    // const [users, setUsers] = useState<Array<IUserData>>([]);        ////state variables [stateVar, fnToModifyState]
     const [state, sendToMachine] = useMachine(appMachine);          //consume machine
     const isLoading = state.matches('list.loading')
     const list = state.context.users;                               //table is populated from list
