@@ -18,18 +18,17 @@ const fetchAllUsers = async () => {
 export const appMachine = createMachine({
   id: 'app',
   initial: 'init',
-  context: {
+  context: {          // internal state for the machine. Used to store data app needs
     users: [],
     error: undefined,
     fields: '',
   },
   states: {
     init: {},
-
     list: {
       states: {
         loading: {
-          invoke: {
+          invoke: {  //when transition into loading state 
             src: (context, event) => async (send) => {
               return new Promise((resolve, reject) => {
                 setTimeout(async () => {
@@ -37,7 +36,7 @@ export const appMachine = createMachine({
                     const data = await fetchAllUsers();
                     resolve(data);
                     assign({
-                      users: (context, event) => data
+                      users: (context, event) => data     //update context data (context.users)
                     })
                   } catch (err) {
                     reject(err);
@@ -60,21 +59,21 @@ export const appMachine = createMachine({
           }
         },
         success: {
-          on: { FETCH: 'loading' }
+          on: { FETCH: 'loading' }  // on FETCH action, transition to loading state
         },
         failed: {},
         idle: {},
         fetch: {
           on: {
-            CLOSE: "idle"
+            CLOSE: "idle"  //on CLOSE action, transition to idle state
           }
         }
       },
     },
   },
-  on: {
+  on: { //all possible actions of states
     LOAD_USERS: {
-      target: 'list.loading',
+      target: 'list.loading',   // on the 'LOAD_USERS' action, transition to list.loading state
     },
 
   },

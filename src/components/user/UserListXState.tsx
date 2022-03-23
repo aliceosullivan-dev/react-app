@@ -8,11 +8,11 @@ import { Link } from 'react-router-dom';
 
 function UserListXState() {
 
-    const [users, setUsers] = useState<Array<IUserData>>([]);
-    const [state, sendToMachine] = useMachine(appMachine);
+    // const [users, setUsers] = useState<Array<IUserData>>([]);        ////state variables [stateVar, fnToModifyState]
+    const [state, sendToMachine] = useMachine(appMachine);          //consume machine
     const isLoading = state.matches('list.loading')
-    const list = state.context.users;
-    const componentMounted = useRef(true); // component is mounted
+    const list = state.context.users;                               //table is populated from list
+    const componentMounted = useRef(true);                          // component is mounted
 
     useEffect(() => {
         sendToMachine('LOAD_USERS');
@@ -22,11 +22,8 @@ function UserListXState() {
         }
     }, []);
 
-    if (users) { }
 
-
-    const deleteUser = (index: number) => {
-        let userId: number = list.at(index)!.id;
+    const deleteUser = (userId: number) => {
         UserDataService.remove(userId)
             .then((response) => {
                 alert("The user was deleted successfully!");
@@ -65,7 +62,8 @@ function UserListXState() {
                                     </thead>
 
                                     <tbody>
-                                        {list && list.map((user: IUserData, index: number) => <tr key={user.id}>
+                                        {list && list.map((user: IUserData, index: number) => 
+                                        <tr key={user.id}>
                                             <td>{user.id}</td>
                                             <td>{user.first_name}</td>
                                             <td>{user.last_name}</td>
@@ -74,7 +72,7 @@ function UserListXState() {
                                                     <div className="btn-group" style={{ marginBottom: "20px" }}>
                                                         <Link to={`users/${user.id}`} className="btn btn-sm btn-outline-secondary">View User </Link>
                                                         <Link to={`users/${user.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit User </Link>
-                                                        <Link to={''} className="btn btn-sm btn-outline-secondary delete" onClick={() => deleteUser(index)}>Delete User </Link>
+                                                        <Link to={''} className="btn btn-sm btn-outline-secondary delete" onClick={() => deleteUser(user.id)}>Delete User </Link>
                                                     </div>
                                                 </div>
                                             </td>
